@@ -1,0 +1,50 @@
+name: covcheck-ci
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - 3.6
+          - 3.7
+          - 3.8
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Python ${{ matrix.python-version }} Setup
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Python dependencies
+        run: |
+          pip install poetry
+          poetry install
+
+      - name: Run flake8
+        run: |
+          poetry run pflake8 . --config pyproject.toml
+
+      - name: Run pylint
+        run: |
+          poetry run pylint covcheck --rcfile pyproject.toml
+          poetry run pylint tests --rcfile pyproject.toml --disable C0114,C0115,C0116,R0201,W0212
+
+      - name: Run mypy
+        run: |
+          poetry run mypy . --config pyproject.toml
+
+      - name: Run pytest
+        run: |
+          poetry run pytest tests --cov=covcheck --cov-report=html --cov-report=xml --cov-branch
+
+      - name: Check Coverage
+        run: |
+          poetry run covcheck coverage.xml --line 99.0 --branch 100.0

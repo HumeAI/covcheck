@@ -1,0 +1,62 @@
+[tool.poetry]
+authors = ["Hume AI Dev <dev@hume.ai>"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+]
+description = "Code coverage validation"
+keywords = ["code", "coverage", "validation", "check", "test"]
+license = "Proprietary"
+name = "covcheck"
+readme = "README.md"
+repository = "https://github.com/HumeAI/covcheck"
+version = "0.1.0"
+
+[tool.poetry.dependencies]
+python = ">=3.7,<3.10"
+pylint = "^2.12.2"
+yapf = "^0.31.0"
+mypy = "^0.920"
+types-setuptools = "^57.4.4"
+pytest = "^6.2.5"
+flake8 = "^4.0.1"
+pyproject-flake8 = "^0.0.1-alpha.2"
+pytest-cov = "^3.0.0"
+pytest-forked = "^1.4.0"
+pytest-xdist = "^2.5.0"
+
+[tool.poetry.scripts]
+covcheck = "covcheck._cli.main:run"
+
+[tool.flake8]
+ignore = ""           # Required to disable default ignores
+max-line-length = 119
+
+[tool.mypy]
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pylint.basic]
+good-names = ["e", "f", "h", "i", "j", "k", "m", "n", "w", "x", "y"]
+max-locals = 25
+notes = ["FIXME"]
+
+[tool.pylint.format]
+max-line-length = 119
+
+[tool.pylint.messages_control]
+disable = [
+  "too-few-public-methods", # R0903
+]
+
+[tool.yapf]
+based_on_style = "pep8"
+column_limit = 119
+indent_width = 4
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
