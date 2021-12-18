@@ -47,4 +47,4 @@ jobs:
 
       - name: Check Coverage
         run: |
-          poetry run covcheck coverage.xml --line 99.0 --branch 100.0
+          poetry run covcheck coverage.xml --config pyproject.toml

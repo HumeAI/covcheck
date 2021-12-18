@@ -28,9 +28,15 @@ pyproject-flake8 = "^0.0.1-alpha.2"
 pytest-cov = "^3.0.0"
 pytest-forked = "^1.4.0"
 pytest-xdist = "^2.5.0"
+toml = "^0.10.2"
+types-toml = "^0.10.1"
 
 [tool.poetry.scripts]
 covcheck = "covcheck._cli.main:run"
+
+[tool.covcheck]
+line = 97.0
+branch = 97.0
 
 [tool.flake8]
 ignore = ""           # Required to disable default ignores
@@ -45,6 +51,7 @@ ignore_missing_imports = true
 [tool.pylint.basic]
 good-names = ["e", "f", "h", "i", "j", "k", "m", "n", "w", "x", "y"]
 max-locals = 25
+max-args = 8
 notes = ["FIXME"]
 
 [tool.pylint.format]
