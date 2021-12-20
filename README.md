@@ -32,5 +32,21 @@ $ coverage xml
 ### 2. Validate that line and branch coverage meet the provided thresholds:
 
 ```bash
-$ covcheck coverage.xml --line 96 --branch --84
+$ covcheck coverage.xml --line 96 --branch 84
+```
+
+## Configuration
+
+Arguments passed through the command-line can also be configured with a pyproject.toml file.
+
+```bash
+$ covcheck coverage.xml --config pyproject.toml
+```
+
+```toml
+# pyproject.toml
+
+[tool.covcheck]
+line = 92.0
+branch = 79.0
 ```
