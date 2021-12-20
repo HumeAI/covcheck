@@ -12,7 +12,7 @@ license = "Proprietary"
 name = "covcheck"
 readme = "README.md"
 repository = "https://github.com/HumeAI/covcheck"
-version = "0.3.0"
+version = "0.3.1"
 
 [tool.poetry.dependencies]
 python = ">=3.7,<3.10"
