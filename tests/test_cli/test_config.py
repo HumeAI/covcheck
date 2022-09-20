@@ -22,6 +22,22 @@ def fixture_example_config_filepath(tmp_path_factory: TempPathFactory) -> Path:
     return config_filepath
 
 
+@pytest.fixture(name='example_group_config_filepath', scope='module')
+def fixture_example_group_config_filepath(tmp_path_factory: TempPathFactory) -> Path:
+    temp_dirpath = tmp_path_factory.mktemp('configs')
+    config_filepath = temp_dirpath / 'pyproject.toml'
+    lines = [
+        '[tool.covcheck.group.unit]\n',
+        '\n',
+        '[tool.covcheck.group.unit.coverage]\n',
+        'line = 6.0\n',
+        'branch = 7.0\n',
+    ]
+    with open(config_filepath, 'w', encoding='utf-8') as f:
+        f.writelines(lines)
+    return config_filepath
+
+
 @pytest.fixture(name='example_config_kwargs', scope='module')
 def fixture_example_config_kwargs() -> Dict[str, Any]:
     return {
@@ -39,7 +55,7 @@ class TestConfig:
     ) -> None:
         config = config_module.Config.create(
             coverage_filepath,
-            config_file=None,
+            config_filepath=None,
             **example_config_kwargs,
         )
         assert config.line == 4.0
@@ -53,7 +69,7 @@ class TestConfig:
     ) -> None:
         config = config_module.Config.create(
             coverage_filepath,
-            config_file=example_config_filepath,
+            config_filepath=example_config_filepath,
         )
         assert config.line == 2.0
         assert config.branch == 3.0
@@ -67,7 +83,7 @@ class TestConfig:
     ) -> None:
         config = config_module.Config.create(
             coverage_filepath,
-            config_file=example_config_filepath,
+            config_filepath=example_config_filepath,
             **example_config_kwargs,
         )
         assert config.line == 4.0
@@ -87,5 +103,52 @@ class TestConfig:
         with pytest.raises(ImportError, match=message):
             config_module.Config.create(
                 coverage_filepath,
-                config_file=example_config_filepath,
+                config_filepath=example_config_filepath,
             )
+
+    def test_create_group(
+        self,
+        example_group_config_filepath: Path,
+        coverage_filepath: Path,
+    ) -> None:
+        config = config_module.Config.create(
+            coverage_filepath,
+            config_filepath=example_group_config_filepath,
+            group='unit',
+        )
+        assert config.line == 6.0
+        assert config.branch == 7.0
+
+    def test_create_missing_all_groups(
+        self,
+        example_config_filepath: Path,
+        coverage_filepath: Path,
+        capsys: pytest.CaptureFixture,
+    ) -> None:
+        with pytest.raises(SystemExit):
+            config_module.Config.create(
+                coverage_filepath,
+                config_filepath=example_config_filepath,
+                group='fake-group',
+            )
+
+        captured = capsys.readouterr()
+        expected = "Group fake-group not found in config"
+        assert expected in captured.err
+
+    def test_create_missing_one_group(
+        self,
+        example_group_config_filepath: Path,
+        coverage_filepath: Path,
+        capsys: pytest.CaptureFixture,
+    ) -> None:
+        with pytest.raises(SystemExit):
+            config_module.Config.create(
+                coverage_filepath,
+                config_filepath=example_group_config_filepath,
+                group='fake-group',
+            )
+
+        captured = capsys.readouterr()
+        expected = "Group fake-group not found in config"
+        assert expected in captured.err
