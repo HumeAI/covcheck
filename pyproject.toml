@@ -35,8 +35,8 @@ types-toml = "^0.10.1"
 covcheck = "covcheck._cli.main:run"
 
 [tool.covcheck]
-line = 97.0
-branch = 97.0
+line = 98.0
+branch = 96.0
 
 [tool.flake8]
 ignore = ""           # Required to disable default ignores
@@ -52,6 +52,7 @@ ignore_missing_imports = true
 good-names = ["e", "f", "h", "i", "j", "k", "m", "n", "w", "x", "y"]
 max-locals = 25
 max-args = 8
+max-branches = 14
 notes = ["FIXME"]
 
 [tool.pylint.format]

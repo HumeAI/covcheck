@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--silent', default=False, action='store_true', help="Do not print coverage results.")
 
     parser.add_argument('--config', default=None, type=str, help="Path to pyproject.toml config file.")
+    parser.add_argument('--group', default=None, type=str, help="Name of coverage group to check.")
 
     return parser.parse_args()
 
@@ -30,11 +31,12 @@ def run() -> None:
 
     config = Config.create(
         args.coverage_file,
-        config_file=args.config,
+        config_filepath=args.config,
         line=args.line,
         branch=args.branch,
         output=args.output,
         silent=args.silent,
+        group=args.group,
     )
 
     validate_coverage(config)
