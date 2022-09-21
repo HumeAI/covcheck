@@ -1,0 +1,34 @@
+site_name: covcheck
+site_url: https://humeai.github.io/covcheck
+
+repo_name: HumeAI/covcheck
+repo_url: https://github.com/HumeAI/covcheck
+
+theme:
+  name: material
+  font:
+    text: Poppins
+  logo: assets/covcheck-dino-small.png
+  favicon: assets/covcheck-dino-small.png
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  version:
+    provider: mike
+
+plugins:
+  - search
+  - mkdocstrings
+  - mike
+
+nav:
+  - "Home": index.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
