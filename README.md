@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/assets/covcheck-dino-banner.png">
+  <img src="docs/assets/covcheck-banner.png">
   <h1>covcheck</h1>
 
   <p>
