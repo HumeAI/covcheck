@@ -1,4 +1,4 @@
-name: covcheck-ci
+name: Package CI
 
 on:
   pull_request:
