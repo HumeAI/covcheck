@@ -10,7 +10,7 @@
   <div>
     <a href="https://badge.fury.io/py/covcheck"><img src="https://badge.fury.io/py/covcheck.svg" alt="PyPI"></a>
     <a href="https://pepy.tech/project/covcheck"><img src="https://pepy.tech/badge/covcheck" alt="Downloads"></a>
-    <a href="https://github.com/HumeAI/covcheck/actions/workflows/covcheck-ci.yml"><img src="https://github.com/HumeAI/covcheck/actions/workflows/covcheck-ci.yaml/badge.svg" alt="CI"></a>
+    <a href="https://github.com/HumeAI/covcheck/actions/workflows/ci.yml"><img src="https://github.com/HumeAI/covcheck/actions/workflows/ci.yaml/badge.svg" alt="CI"></a>
   </div>
   <br>
 </div>
