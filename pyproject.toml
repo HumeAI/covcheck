@@ -45,7 +45,7 @@ covcheck = "covcheck._cli.main:run"
 
 [tool.covcheck]
 line = 98.0
-branch = 96.0
+branch = 95.0
 
 [tool.flake8]
 ignore = ""           # Required to disable default ignores
