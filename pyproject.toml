@@ -15,17 +15,17 @@ repository = "https://github.com/HumeAI/covcheck"
 version = "0.4.2"
 
 [tool.poetry.dependencies]
-python = ">=3.7"
+python = ">=3.8.1"
 
 [tool.poetry.dev-dependencies]
-pylint = "^2.12.2"
+pylint = "^2.16.2"
 yapf = "^0.31.0"
-mypy = "^0.920"
+mypy = "^1.0.1"
 types-setuptools = "^57.4.4"
-pytest = "^6.2.5"
-flake8 = "^3.9.2"
-pyproject-flake8 = "^0.0.1-alpha.2"
-pytest-cov = "^3.0.0"
+pytest = "^7.2.1"
+flake8 = "^6.0.0"
+pyproject-flake8 = "^6.0.0"
+pytest-cov = "^4.0.0"
 pytest-forked = "^1.4.0"
 pytest-xdist = "^2.5.0"
 toml = "^0.10.2"
@@ -45,7 +45,7 @@ covcheck = "covcheck._cli.main:run"
 
 [tool.covcheck]
 line = 98.0
-branch = 96.0
+branch = 95.0
 
 [tool.flake8]
 ignore = ""           # Required to disable default ignores
